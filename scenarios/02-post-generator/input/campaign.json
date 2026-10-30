@@ -1,0 +1,14 @@
+{
+  "article": "article.md",
+  "url": "https://example.com/blog/four-day-week-results?lang=en",
+  "publish_date": "2026-03-26",
+  "timezone": "Europe/London",
+  "post_time": "09:00",
+  "utm": { "medium": "social", "campaign": "4dw-results-2026" },
+  "hashtags": { "max_per_post": 2, "approved": ["#FourDayWeek", "#FutureOfWork", "#Productivity"] },
+  "platforms": [
+    { "key": "x", "name": "X", "max_chars": 280 },
+    { "key": "linkedin", "name": "LinkedIn", "max_chars": 1300, "first_line_max_chars": 150 },
+    { "key": "threads", "name": "Threads", "max_chars": 500 }
+  ]
+}

@@ -1,0 +1,113 @@
+commit 4f1c9e2
+Author: Priya Shah <priya@acme.dev>
+Date:   2026-10-27
+
+    docs: fix a typo in the README
+
+commit b83d0a7
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   2026-10-26
+
+    chore(deps): bump yaml from 2.5.1 to 2.6.0
+
+commit 9e27c4d
+Author: Marcus Reid <marcus@acme.dev>
+Date:   2026-10-24
+
+    revert: feat(export): add CSV export
+
+    This reverts commit 31a6f0b. The export broke on Windows line endings;
+    it will come back in a later release.
+
+commit 7ad5512
+Author: Tomás Ortega <tomas@ortega.io>
+Date:   2026-10-23
+
+    fix(parser): handle empty config files
+
+    An empty file used to crash the parser. It now reports "no settings found".
+
+    Co-authored-by: Wei Chen <wei@chen.dev>
+
+commit e0b4c18
+Author: priya shah <priya.shah@users.noreply.github.com>
+Date:   2026-10-22
+
+    feat(cli): add a --json flag to the status command
+
+commit 2c9f7b3
+Author: Marcus Reid <marcus@acme.dev>
+Date:   2026-10-21
+
+    fix(auth): refresh tokens before they expire
+
+    Tokens are now refreshed 60 seconds before they run out, so long checks
+    no longer fail halfway through.
+
+    BREAKING CHANGE: the onExpire callback is removed. Use onRefresh instead.
+
+commit c71e8d0
+Author: Lena Vogel <lena@acme.dev>
+Date:   2026-10-20
+
+    perf(cache): reuse parsed manifests between runs
+
+commit 5b3a9f4
+Author: Tomás Ortega <tomas@ortega.io>
+Date:   2026-10-19
+
+    feat(api)!: rename client.fetchAll to client.list
+
+commit 31a6f0b
+Author: Marcus Reid <marcus@acme.dev>
+Date:   2026-10-17
+
+    feat(export): add CSV export
+
+commit d4e8a21
+Author: Lena Vogel <lena@acme.dev>
+Date:   2026-10-16
+
+    fix: return exit code 1 when a check fails
+
+commit a9c0f36
+Author: Sam Okafor <sam@okafor.dev>
+Date:   2026-10-15
+
+    test: cover the retry path
+
+commit 0f6d2b8
+Author: Sam Okafor <sam@okafor.dev>
+Date:   2026-10-14
+
+    feat(config): support extends in config files
+
+commit 8e1b7c5
+Author: Lena Vogel <lena.vogel@gmail.com>
+Date:   2026-10-13
+
+    fix(cli): stop printing colour codes when output is piped
+
+commit 6a2d4f9
+Author: Priya Shah <priya@acme.dev>
+Date:   2026-10-12
+
+    ci: cache node_modules between jobs
+
+commit 1d7e3c0 (tag: v0.9.3)
+Author: Priya Shah <priya@acme.dev>
+Date:   2026-10-09
+
+    chore(release): 0.9.3
+
+commit f5a8b2e
+Author: Jonas Berg <jonas@berg.se>
+Date:   2026-10-08
+
+    fix(parser): accept tabs in indented blocks
+
+commit 3c6e0d1
+Author: Lena Vogel <lena@acme.dev>
+Date:   2026-10-06
+
+    feat(cli): add the doctor command

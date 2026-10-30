@@ -1,0 +1,72 @@
+[
+  {
+    "hash": "4f1c9e2",
+    "author": "Priya Shah",
+    "subject": "docs: fix a typo in the README"
+  },
+  {
+    "hash": "b83d0a7",
+    "author": "dependabot[bot]",
+    "subject": "chore(deps): bump yaml from 2.5.1 to 2.6.0"
+  },
+  {
+    "hash": "9e27c4d",
+    "author": "Marcus Reid",
+    "subject": "revert: feat(export): add CSV export"
+  },
+  {
+    "hash": "7ad5512",
+    "author": "Tomás Ortega",
+    "subject": "fix(parser): handle empty config files"
+  },
+  {
+    "hash": "e0b4c18",
+    "author": "priya shah",
+    "subject": "feat(cli): add a --json flag to the status command"
+  },
+  {
+    "hash": "2c9f7b3",
+    "author": "Marcus Reid",
+    "subject": "fix(auth): refresh tokens before they expire"
+  },
+  {
+    "hash": "c71e8d0",
+    "author": "Lena Vogel",
+    "subject": "perf(cache): reuse parsed manifests between runs"
+  },
+  {
+    "hash": "5b3a9f4",
+    "author": "Tomás Ortega",
+    "subject": "feat(api)!: rename client.fetchAll to client.list"
+  },
+  {
+    "hash": "31a6f0b",
+    "author": "Marcus Reid",
+    "subject": "feat(export): add CSV export"
+  },
+  {
+    "hash": "d4e8a21",
+    "author": "Lena Vogel",
+    "subject": "fix: return exit code 1 when a check fails"
+  },
+  {
+    "hash": "a9c0f36",
+    "author": "Sam Okafor",
+    "subject": "test: cover the retry path"
+  },
+  {
+    "hash": "0f6d2b8",
+    "author": "Sam Okafor",
+    "subject": "feat(config): support extends in config files"
+  },
+  {
+    "hash": "8e1b7c5",
+    "author": "Lena Vogel",
+    "subject": "fix(cli): stop printing colour codes when output is piped"
+  },
+  {
+    "hash": "6a2d4f9",
+    "author": "Priya Shah",
+    "subject": "ci: cache node_modules between jobs"
+  }
+]

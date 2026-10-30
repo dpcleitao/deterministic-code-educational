@@ -1,0 +1,7 @@
+[
+  { "id": "ADV-2026-0142", "package": "dashkit", "vulnerable": "<4.17.21", "severity": "high", "title": "Prototype pollution in merge()" },
+  { "id": "ADV-2026-0177", "package": "fetchline", "vulnerable": ">=6.0.0 <6.19.8", "severity": "moderate", "title": "Header injection through redirects" },
+  { "id": "ADV-2026-0203", "package": "@acme/ui-kit", "vulnerable": "<0.5.0", "severity": "high", "title": "Cross-site scripting in Tooltip" },
+  { "id": "ADV-2026-0219", "package": "schemata", "vulnerable": ">=3.0.0 <3.20.0", "severity": "low", "title": "Slow regular expression in email()" },
+  { "id": "ADV-2026-0231", "package": "routekit", "vulnerable": ">=5.0.0 <5.0.1", "severity": "moderate", "title": "Open redirect in static()" }
+]

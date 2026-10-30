@@ -1,0 +1,12 @@
+{
+  "name": "deterministic-code-educational",
+  "private": true,
+  "description": "Find the weak step: hands-on scenarios for deterministic and probabilistic steps in Claude Code skills.",
+  "license": "MIT",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node bin/lab.mjs selftest",
+    "lab": "node bin/lab.mjs"
+  }
+}

@@ -1,0 +1,165 @@
+[
+  {
+    "id": "E01",
+    "date": "2026-05-07",
+    "paid_by": "Ana",
+    "amount": 412,
+    "currency": "GBP",
+    "split_between": [
+      "Ana",
+      "Ben",
+      "Chloé",
+      "Dev"
+    ]
+  },
+  {
+    "id": "E02",
+    "date": "2026-05-08",
+    "paid_by": "Ben",
+    "amount": 186.4,
+    "currency": "EUR",
+    "split_between": [
+      "Ana",
+      "Ben",
+      "Chloé",
+      "Dev"
+    ]
+  },
+  {
+    "id": "E03",
+    "date": "2026-05-08",
+    "paid_by": "Chloé",
+    "amount": 23.7,
+    "currency": "EUR",
+    "split_between": [
+      "Ana",
+      "Ben",
+      "Chloé",
+      "Dev"
+    ]
+  },
+  {
+    "id": "E04",
+    "date": "2026-05-09",
+    "paid_by": "Dev",
+    "amount": 96,
+    "currency": "EUR",
+    "split_between": [
+      "Ana",
+      "Ben",
+      "Chloé",
+      "Dev"
+    ]
+  },
+  {
+    "id": "E05",
+    "date": "2026-05-09",
+    "paid_by": "Ana",
+    "amount": 41.25,
+    "currency": "EUR",
+    "split_between": [
+      "Ana",
+      "Ben",
+      "Chloé"
+    ]
+  },
+  {
+    "id": "E06",
+    "date": "2026-05-09",
+    "paid_by": "Ben",
+    "amount": 10,
+    "currency": "GBP",
+    "split_between": [
+      "Ben",
+      "Chloé",
+      "Dev"
+    ]
+  },
+  {
+    "id": "E07",
+    "date": "2026-05-10",
+    "paid_by": "Chloé",
+    "amount": 138.6,
+    "currency": "EUR",
+    "split_between": [
+      "Ana",
+      "Ben",
+      "Chloé",
+      "Dev"
+    ]
+  },
+  {
+    "id": "E08",
+    "date": "2026-05-10",
+    "paid_by": "Dev",
+    "amount": 18.9,
+    "currency": "EUR",
+    "split_between": [
+      "Ana",
+      "Dev"
+    ]
+  },
+  {
+    "id": "E09",
+    "date": "2026-05-10",
+    "paid_by": "Ben",
+    "amount": 720,
+    "currency": "GBP",
+    "split_between": [
+      "Ana",
+      "Ben",
+      "Chloé",
+      "Dev"
+    ]
+  },
+  {
+    "id": "E10",
+    "date": "2026-05-11",
+    "paid_by": "Ben",
+    "amount": 52.8,
+    "currency": "EUR",
+    "split_between": [
+      "Ana",
+      "Ben",
+      "Chloé",
+      "Dev"
+    ]
+  },
+  {
+    "id": "E11",
+    "date": "2026-05-11",
+    "paid_by": "Chloé",
+    "amount": 31.5,
+    "currency": "EUR",
+    "split_between": [
+      "Ben",
+      "Chloé"
+    ]
+  },
+  {
+    "id": "E12",
+    "date": "2026-05-11",
+    "paid_by": "Ana",
+    "amount": -60,
+    "currency": "EUR",
+    "split_between": [
+      "Ana",
+      "Ben",
+      "Chloé",
+      "Dev"
+    ]
+  },
+  {
+    "id": "E13",
+    "date": "2026-05-11",
+    "paid_by": "Dev",
+    "amount": 44,
+    "currency": "EUR",
+    "split_between": [
+      "Ana",
+      "Ben",
+      "Chloé",
+      "Dev"
+    ]
+  }
+]

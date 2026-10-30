@@ -1,0 +1,74 @@
+[
+  {
+    "id": "T01",
+    "customer": "Northwind",
+    "priority": "P2",
+    "opened_at": "2026-03-29T23:40:00Z"
+  },
+  {
+    "id": "T03",
+    "customer": "Initech",
+    "priority": "P3",
+    "opened_at": "2026-03-30T10:00:00+01:00"
+  },
+  {
+    "id": "T04",
+    "customer": "Umbrella",
+    "priority": "P2",
+    "opened_at": "2026-03-31T14:00:00+01:00"
+  },
+  {
+    "id": "T05",
+    "customer": "Hooli",
+    "priority": "P2",
+    "opened_at": "2026-04-02T16:30:00+01:00"
+  },
+  {
+    "id": "T06",
+    "customer": "Northwind",
+    "priority": "P1",
+    "opened_at": "2026-04-01T08:15:00Z"
+  },
+  {
+    "id": "T07",
+    "customer": "Globex",
+    "priority": "P2",
+    "opened_at": "2026-04-04T11:00:00+01:00"
+  },
+  {
+    "id": "T08",
+    "customer": "Acme",
+    "priority": "P1",
+    "opened_at": "2026-03-30T17:20:00+01:00"
+  },
+  {
+    "id": "T09",
+    "customer": "Initech",
+    "priority": "P2",
+    "opened_at": "2026-04-01T11:00:00+01:00"
+  },
+  {
+    "id": "T10",
+    "customer": "Hooli",
+    "priority": "P3",
+    "opened_at": "2026-04-05T20:00:00+01:00"
+  },
+  {
+    "id": "T11",
+    "customer": "Umbrella",
+    "priority": "P1",
+    "opened_at": "2026-04-02T17:00:00+01:00"
+  },
+  {
+    "id": "T13",
+    "customer": "Initech",
+    "priority": "P3",
+    "opened_at": "2026-03-31T09:00:00+01:00"
+  },
+  {
+    "id": "T14",
+    "customer": "Northwind",
+    "priority": "P2",
+    "opened_at": "2026-04-03T10:00:00+01:00"
+  }
+]

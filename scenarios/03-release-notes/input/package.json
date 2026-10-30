@@ -1,0 +1,6 @@
+{
+  "name": "tidewater",
+  "version": "0.9.3",
+  "description": "A small CLI for checking config files before they ship.",
+  "license": "MIT"
+}

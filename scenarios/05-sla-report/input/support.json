@@ -1,0 +1,7 @@
+{
+  "timezone": "Europe/London",
+  "days": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+  "open": "09:00",
+  "close": "17:30",
+  "holidays": ["2026-04-03", "2026-04-06"]
+}

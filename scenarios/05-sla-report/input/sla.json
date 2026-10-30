@@ -1,0 +1,5 @@
+{
+  "first_response_targets_business_hours": { "P1": 1, "P2": 4, "P3": 16 },
+  "enterprise_p2_target": "P1",
+  "notes": "Targets count support hours only. Enterprise customers' P2 tickets are held to the P1 target."
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "dashkit",
+    "installed": "4.17.4",
+    "advisory": "ADV-2026-0142"
+  },
+  {
+    "name": "fetchline",
+    "installed": "6.19.2",
+    "advisory": "ADV-2026-0177"
+  },
+  {
+    "name": "@acme/ui-kit",
+    "installed": "0.4.2",
+    "advisory": "ADV-2026-0203"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "T03",
+    "hours": 16.5,
+    "target": 16
+  },
+  {
+    "id": "T04",
+    "hours": 1.5,
+    "target": 1
+  },
+  {
+    "id": "T09",
+    "hours": 4.5,
+    "target": 4
+  },
+  {
+    "id": "T13",
+    "hours": 37,
+    "target": 16
+  }
+]

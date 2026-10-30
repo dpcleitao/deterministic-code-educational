@@ -1,0 +1,15 @@
+id,customer,priority,opened_at,first_response_at,subject
+T01,Northwind,P2,2026-03-29T23:40:00Z,2026-03-30T09:20:00+01:00,Invoices export is empty
+T02,Globex,P1,2026-03-27T16:10:00+00:00,2026-03-27T16:40:00+00:00,Checkout is down
+T03,Initech,P3,2026-03-30T10:00:00+01:00,2026-04-01T09:30:00+01:00,Question about seat pricing
+T04,Umbrella,P2,2026-03-31T14:00:00+01:00,2026-03-31T15:30:00+01:00,SSO login loops for some users
+T05,Hooli,P2,2026-04-02T16:30:00+01:00,2026-04-07T10:00:00+01:00,Webhook retries look wrong
+T06,Northwind,P1,2026-04-01T08:15:00Z,2026-04-01T09:05:00Z,API returning 500s
+T07,Globex,P2,2026-04-04T11:00:00+01:00,2026-04-07T12:30:00+01:00,Report totals do not match
+T08,Acme,P1,2026-03-30T17:20:00+01:00,2026-03-31T09:45:00+01:00,Dashboard will not load
+T09,Initech,P2,2026-04-01T11:00:00+01:00,2026-04-01T15:30:00+01:00,CSV import fails on large files
+T10,Hooli,P3,2026-04-05T20:00:00+01:00,2026-04-08T09:00:00+01:00,Feature request: dark mode
+T11,Umbrella,P1,2026-04-02T17:00:00+01:00,2026-04-07T09:20:00+01:00,Data sync stopped
+T12,Acme,P2,2026-04-06T10:00:00+01:00,2026-04-07T09:10:00+01:00,Audit log missing entries
+T13,Initech,P3,2026-03-31T09:00:00+01:00,,How do we add a second admin?
+T14,Northwind,P2,2026-04-03T10:00:00+01:00,2026-04-03T10:30:00+01:00,Password reset email delayed
