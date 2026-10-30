@@ -1,0 +1,22 @@
+{
+  "breaking": [
+    "2c9f7b3",
+    "5b3a9f4"
+  ],
+  "features": [
+    "e0b4c18",
+    "0f6d2b8"
+  ],
+  "fixes": [
+    "7ad5512",
+    "d4e8a21",
+    "8e1b7c5"
+  ],
+  "other": [
+    "4f1c9e2",
+    "b83d0a7",
+    "c71e8d0",
+    "a9c0f36",
+    "6a2d4f9"
+  ]
+}

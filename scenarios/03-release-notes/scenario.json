@@ -1,0 +1,5 @@
+{
+  "title": "Release notes",
+  "difficulty": "medium · looks like summarising, is mostly parsing",
+  "blurb": "Turn a git log into a changelog entry, a version number and a contributor list."
+}

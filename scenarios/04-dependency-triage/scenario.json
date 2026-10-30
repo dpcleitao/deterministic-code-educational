@@ -1,0 +1,5 @@
+{
+  "title": "Dependency triage",
+  "difficulty": "hard · every step looks like reading, every step is a comparison",
+  "blurb": "Which packages can update now, which need a breaking bump, and which have a known hole?"
+}

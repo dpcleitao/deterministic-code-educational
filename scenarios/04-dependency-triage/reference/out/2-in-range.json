@@ -1,0 +1,10 @@
+{
+  "routekit": "4.21.1",
+  "dashkit": "4.17.21",
+  "schemata": "3.24.1",
+  "datewise": "2.29.10",
+  "@acme/ui-kit": "0.4.9",
+  "tinypad": "0.0.3",
+  "fetchline": "6.19.2",
+  "colorize": "5.10.0"
+}

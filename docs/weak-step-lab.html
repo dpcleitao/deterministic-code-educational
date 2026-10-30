@@ -1,0 +1,569 @@
+<title>The Weak Step Lab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: danleitao.com's Vignelli canon. A bordered page column, a numbered sidebar,
+   hairline rules as the grid skeleton, one accent used only where meaning demands it. */
+:root {
+  --paper: #ffffff;
+  --paper-2: #f2f2f7;
+  --ink-1: rgba(0, 0, 0, 0.92);
+  --ink-2: rgba(0, 0, 0, 0.72);
+  --ink-3: rgba(0, 0, 0, 0.56);
+  --ink-4: rgba(0, 0, 0, 0.42);
+  --rule: rgba(120, 120, 128, 0.28);
+  --rule-strong: rgba(0, 0, 0, 0.52);
+  --accent: #5856d6;
+  --accent-ink: #ffffff;
+  --unsaid: #b26a12;
+  --unsaid-wash: rgba(231, 148, 51, 0.14);
+  --pass: #107a63;
+  --fail: #c2412d;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --page-max: 1280px;
+  --sidebar-w: 240px;
+  --col: 640px;
+  --section-y: 80px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f0f14; --paper-2: #1a1a22;
+    --ink-1: rgba(255, 255, 255, 0.92); --ink-2: rgba(255, 255, 255, 0.74);
+    --ink-3: rgba(255, 255, 255, 0.58); --ink-4: rgba(255, 255, 255, 0.44);
+    --rule: rgba(160, 160, 176, 0.26); --rule-strong: rgba(255, 255, 255, 0.5);
+    --accent: #8e8cf5; --accent-ink: #0f0f14;
+    --unsaid: #e79433; --unsaid-wash: rgba(231, 148, 51, 0.16);
+    --pass: #3fc29e; --fail: #f0715c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f0f14; --paper-2: #1a1a22;
+  --ink-1: rgba(255, 255, 255, 0.92); --ink-2: rgba(255, 255, 255, 0.74);
+  --ink-3: rgba(255, 255, 255, 0.58); --ink-4: rgba(255, 255, 255, 0.44);
+  --rule: rgba(160, 160, 176, 0.26); --rule-strong: rgba(255, 255, 255, 0.5);
+  --accent: #8e8cf5; --accent-ink: #0f0f14;
+  --unsaid: #e79433; --unsaid-wash: rgba(231, 148, 51, 0.16);
+  --pass: #3fc29e; --fail: #f0715c;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  background: var(--paper);
+  color: var(--ink-1);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--paper);
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.page {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 640px) { .page { padding-left: max(48px, env(safe-area-inset-left, 0px)); padding-right: max(48px, env(safe-area-inset-right, 0px)); } }
+
+/* Header */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  height: 60px; border-bottom: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(8px);
+}
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; min-width: 0; }
+.mark {
+  display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0;
+  border-radius: 50%; background: var(--accent); color: var(--accent-ink);
+  font-size: 13px; font-weight: 600;
+}
+.brand-name { font-size: 18px; font-weight: 500; white-space: nowrap; }
+.btn {
+  display: inline-flex; align-items: center; height: 36px; padding: 0 14px;
+  font: 500 13px/1 var(--font-sans); text-decoration: none; white-space: nowrap;
+  border: 1px solid var(--rule); color: var(--ink-1); background: transparent; cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+.btn:hover { border-color: var(--rule-strong); }
+.btn-primary { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+.btn-primary:hover { background: color-mix(in srgb, var(--accent) 86%, var(--ink-1)); }
+
+/* Grid */
+.grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) { .grid { grid-template-columns: var(--sidebar-w) minmax(0, 1fr); column-gap: 48px; } }
+.side { display: none; }
+@media (min-width: 900px) {
+  .side { display: block; border-right: 1px solid var(--rule); }
+  .side nav { position: sticky; top: 60px; display: flex; flex-direction: column; gap: 20px; padding: var(--section-y) 32px var(--section-y) 0; }
+}
+.side a { display: grid; grid-template-columns: 32px 1fr; gap: 8px; align-items: baseline; text-decoration: none; }
+.side a span:last-child { font-size: 13px; color: var(--ink-3); transition: color 180ms ease; }
+.side a:hover span:last-child { color: var(--ink-1); }
+main { min-width: 0; }
+
+/* Type roles */
+.eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.num { font-size: 12px; font-weight: 500; color: var(--ink-4); font-variant-numeric: tabular-nums; }
+.display { font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.04; letter-spacing: -0.01em; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(26px, 3.6vw, 36px); font-weight: 700; line-height: 1.1; text-wrap: balance; margin: 0; }
+h3 { font-size: 14px; font-weight: 600; line-height: 1.3; margin: 0; }
+p, li { font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+p { margin: 0; max-width: var(--col); }
+.lede { font-size: 19px; line-height: 1.5; color: var(--ink-2); max-width: 600px; }
+code, .mono { font-family: var(--font-mono); font-size: 0.88em; }
+:not(pre) > code { background: var(--paper-2); padding: 1px 5px; }
+
+/* Sections */
+section { border-bottom: 1px solid var(--rule); padding-block: var(--section-y); }
+section:last-of-type { border-bottom: 0; }
+.sec-head { display: flex; flex-direction: column; gap: 24px; margin-bottom: 32px; }
+.sec-head .marker { display: flex; gap: 12px; align-items: baseline; }
+.sec-head::after { content: ""; display: block; height: 1px; background: var(--rule); max-width: var(--col); }
+.stack { display: flex; flex-direction: column; gap: 20px; }
+
+.hero { padding-block: 96px 80px; }
+.hero .stack { gap: 28px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; max-width: var(--col); }
+.list li { position: relative; padding-left: 20px; }
+.list li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 8px; height: 1px; background: var(--rule-strong); }
+
+.callout { border-left: 1px solid var(--rule-strong); padding-left: 16px; max-width: var(--col); }
+
+/* Three actors */
+.actors { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); max-width: 860px; }
+.actor { border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 20px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.actor .kind { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-4); }
+.actor p { font-size: 15px; }
+.actor.code { background: var(--paper-2); }
+
+/* Diagram */
+.figure { border: 1px solid var(--rule); padding: 24px; max-width: 860px; display: flex; flex-direction: column; gap: 16px; }
+.figure-scroll { overflow-x: auto; }
+.figure svg { display: block; min-width: 720px; width: 100%; height: auto; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 13px; color: var(--ink-3); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.sw { width: 14px; height: 10px; border: 1.5px solid var(--ink-1); display: inline-block; }
+.sw.round { border-radius: 6px; }
+.sw.flag { border-color: var(--unsaid); background: var(--unsaid-wash); border-style: dashed; }
+
+/* Scenario table */
+.table-wrap { overflow-x: auto; max-width: 960px; border-top: 1px solid var(--rule-strong); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; }
+th, td { text-align: left; vertical-align: top; padding: 14px 16px 14px 0; border-bottom: 1px solid var(--rule); font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+th { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-4); padding-top: 12px; }
+td:first-child { font-variant-numeric: tabular-nums; color: var(--ink-4); width: 40px; }
+td strong { color: var(--ink-1); font-weight: 600; }
+.difficulty { display: inline-flex; gap: 3px; vertical-align: middle; }
+.difficulty i { width: 7px; height: 7px; border: 1px solid var(--ink-3); display: inline-block; }
+.difficulty i.on { background: var(--ink-1); border-color: var(--ink-1); }
+details summary { cursor: pointer; color: var(--accent); font-size: 14px; font-weight: 500; list-style: none; }
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "+ "; }
+details[open] summary::before { content: "− "; }
+details p { font-size: 14px; margin-top: 8px; }
+
+/* Sessions */
+.sessions { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 860px; border-top: 1px solid var(--rule); }
+.session { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 16px; padding-block: 24px; border-bottom: 1px solid var(--rule); }
+.session .n { font-size: 28px; font-weight: 700; color: var(--ink-4); font-variant-numeric: tabular-nums; line-height: 1; }
+.session.run .n { color: var(--accent); }
+.session .body { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.session .who { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-4); }
+
+.cmd { display: flex; align-items: stretch; border: 1px solid var(--rule); background: var(--paper-2); max-width: 100%; }
+.cmd pre { margin: 0; padding: 10px 14px; overflow-x: auto; flex: 1; min-width: 0; font-family: var(--font-mono); font-size: 13px; line-height: 1.5; color: var(--ink-1); }
+.cmd button { border: 0; border-left: 1px solid var(--rule); background: transparent; color: var(--ink-3); font: 500 12px var(--font-sans); padding: 0 14px; cursor: pointer; }
+.cmd button:hover { color: var(--ink-1); }
+
+/* Report sample */
+.report { border: 1px solid var(--rule); background: var(--paper-2); padding: 18px 20px; font-family: var(--font-mono); font-size: 13px; line-height: 1.7; color: var(--ink-2); overflow-x: auto; max-width: 760px; white-space: pre; }
+.report .p { color: var(--pass); }
+.report .f { color: var(--fail); }
+.report .h { color: var(--ink-1); font-weight: 500; }
+.report .d { color: var(--ink-4); }
+
+.verdicts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0; border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); max-width: 860px; }
+.verdicts div { padding: 16px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.verdicts p { font-size: 14px; }
+
+/* Before / after */
+.pair { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; max-width: 960px; }
+@media (min-width: 760px) { .pair { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.pair figure { margin: 0; border: 1px solid var(--rule); display: flex; flex-direction: column; min-width: 0; }
+.pair figcaption { padding: 10px 14px; border-bottom: 1px solid var(--rule); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-4); }
+.pair pre { margin: 0; padding: 14px; overflow-x: auto; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.6; color: var(--ink-2); }
+.pair mark { background: var(--unsaid-wash); color: var(--ink-1); }
+
+footer { border-top: 1px solid var(--rule); padding-block: 48px; display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+footer p { font-size: 14px; }
+
+@keyframes rise { from { opacity: 0.001; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.rise-2 { animation-delay: 100ms; }
+.rise-3 { animation-delay: 180ms; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .rise { animation: none; } }
+</style>
+
+<div class="page">
+  <header class="top">
+    <a class="brand" href="https://danleitao.com" aria-label="Dan Leitão, home">
+      <span class="mark" aria-hidden="true">DL</span>
+      <span class="brand-name">Dan Leitão</span>
+    </a>
+    <a class="btn btn-primary" href="#start">Try the lab</a>
+  </header>
+
+  <div class="grid">
+    <aside class="side">
+      <nav aria-label="Sections">
+        <a href="#idea"><span class="num">01</span><span>The idea</span></a>
+        <a href="#hidden"><span class="num">02</span><span>Why you can't see it</span></a>
+        <a href="#scenarios"><span class="num">03</span><span>The five scenarios</span></a>
+        <a href="#sessions"><span class="num">04</span><span>Three sessions</span></a>
+        <a href="#checks"><span class="num">05</span><span>Checking every step</span></a>
+        <a href="#fix"><span class="num">06</span><span>The fix</span></a>
+        <a href="#start"><span class="num">07</span><span>Start</span></a>
+      </nav>
+    </aside>
+
+    <main>
+      <section class="hero">
+        <div class="stack">
+          <span class="eyebrow rise">The weak step lab</span>
+          <h1 class="display rise rise-2">A model decides.<br>Code counts.</h1>
+          <p class="lede rise rise-3">Five Claude Code skills that look fine, finish with a confident answer, and get it wrong in a single step. You run them, check every step with plain code, find the one that slips, and move it out of the model.</p>
+          <div class="hero-actions rise rise-3">
+            <a class="btn btn-primary" href="#start">Get the repo</a>
+            <a class="btn" href="#scenarios">See the scenarios</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="idea">
+        <div class="sec-head">
+          <div class="marker"><span class="num">01</span><span class="eyebrow">The idea</span></div>
+          <h2>Every step in a skill belongs to someone.</h2>
+        </div>
+        <div class="stack">
+          <p>A skill is a list of steps. You, the model, or code can take each one. Most skills never say which, so the model ends up taking all of them, including the ones it is bad at.</p>
+          <div class="actors">
+            <div class="actor">
+              <span class="kind">You</span>
+              <h3>Read, decide, approve</h3>
+              <p>It costs your time, so spend it on the calls only you can make.</p>
+            </div>
+            <div class="actor">
+              <span class="kind">The model · probabilistic</span>
+              <h3>Choose, summarise, write</h3>
+              <p>It can answer differently on the next run, or on another model. That is fine for judgement and bad for arithmetic.</p>
+            </div>
+            <div class="actor code">
+              <span class="kind">Code · deterministic</span>
+              <h3>Count, sort, compare, convert</h3>
+              <p>The same input gives the same output on every run and every model. It costs almost nothing.</p>
+            </div>
+          </div>
+          <p>For each step, ask whether it needs judgement or could be code. The model can still help you write that code.</p>
+        </div>
+      </section>
+
+      <section id="hidden">
+        <div class="sec-head">
+          <div class="marker"><span class="num">02</span><span class="eyebrow">Why you can't see it</span></div>
+          <h2>The final answer hides the step that moved.</h2>
+        </div>
+        <div class="stack">
+          <p>Here is the social post skill from the lab, drawn as its steps. It reads a blog post and produces three scheduled posts. Four of its six steps could be code. Three things it never says can change the result.</p>
+          <div class="figure">
+            <div class="figure-scroll">
+              <svg viewBox="0 0 900 250" role="img" aria-labelledby="dg-t dg-d">
+                <title id="dg-t">The post generator skill as six steps</title>
+                <desc id="dg-d">Steps 2, 4 and 5 are deterministic and drawn square. Steps 1, 3 and 6 need judgement and are drawn rounded. Three unsaid rules hang off steps 2, 4 and 5: the URL already has a query, how characters are counted, and the clocks change on 29 March.</desc>
+                <defs>
+                  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-3)"></path>
+                  </marker>
+                </defs>
+                <g font-family="Inter, system-ui, sans-serif" font-size="13" fill="var(--ink-1)">
+                  <g stroke="var(--ink-1)" stroke-width="1.5" fill="var(--paper)">
+                    <rect x="10" y="30" width="120" height="56" rx="16"></rect>
+                    <rect x="160" y="30" width="120" height="56" rx="0" fill="var(--paper-2)"></rect>
+                    <rect x="310" y="30" width="120" height="56" rx="16"></rect>
+                    <rect x="460" y="30" width="120" height="56" rx="0" fill="var(--paper-2)"></rect>
+                    <rect x="610" y="30" width="120" height="56" rx="0" fill="var(--paper-2)"></rect>
+                    <rect x="760" y="30" width="130" height="56" rx="16"></rect>
+                  </g>
+                  <g stroke="var(--ink-3)" stroke-width="1.2" fill="none" marker-end="url(#arr)">
+                    <line x1="130" y1="58" x2="158" y2="58"></line>
+                    <line x1="280" y1="58" x2="308" y2="58"></line>
+                    <line x1="430" y1="58" x2="458" y2="58"></line>
+                    <line x1="580" y1="58" x2="608" y2="58"></line>
+                    <line x1="730" y1="58" x2="758" y2="58"></line>
+                  </g>
+                  <g text-anchor="middle">
+                    <text x="70" y="54" font-weight="600">1 · Facts</text><text x="70" y="72" fill="var(--ink-3)" font-size="12">pick the figure</text>
+                    <text x="220" y="54" font-weight="600">2 · Links</text><text x="220" y="72" fill="var(--ink-3)" font-size="12">add UTM tags</text>
+                    <text x="370" y="54" font-weight="600">3 · Posts</text><text x="370" y="72" fill="var(--ink-3)" font-size="12">write each one</text>
+                    <text x="520" y="54" font-weight="600">4 · Fit</text><text x="520" y="72" fill="var(--ink-3)" font-size="12">count characters</text>
+                    <text x="670" y="54" font-weight="600">5 · Schedule</text><text x="670" y="72" fill="var(--ink-3)" font-size="12">dates to UTC</text>
+                    <text x="825" y="54" font-weight="600">6 · Pack</text><text x="825" y="72" fill="var(--ink-3)" font-size="12">put it together</text>
+                  </g>
+                  <g stroke="var(--unsaid)" stroke-width="1.2" stroke-dasharray="3 3" fill="none">
+                    <line x1="220" y1="86" x2="220" y2="140"></line>
+                    <line x1="520" y1="86" x2="520" y2="140"></line>
+                    <line x1="670" y1="86" x2="700" y2="192"></line>
+                  </g>
+                  <g stroke="var(--unsaid)" stroke-width="1.5" stroke-dasharray="4 3" fill="var(--unsaid-wash)">
+                    <rect x="130" y="140" width="180" height="40"></rect>
+                    <rect x="420" y="140" width="200" height="40"></rect>
+                    <rect x="630" y="192" width="250" height="40"></rect>
+                  </g>
+                  <g text-anchor="middle" font-size="12" fill="var(--ink-1)">
+                    <text x="220" y="165">unsaid: URL already has ?lang=en</text>
+                    <text x="520" y="165">unsaid: how to count, honestly</text>
+                    <text x="755" y="217">unsaid: clocks change on 29 March</text>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="legend">
+              <span><i class="sw"></i>Deterministic, could be code</span>
+              <span><i class="sw round"></i>Needs judgement</span>
+              <span><i class="sw flag"></i>The skill leaves this unsaid</span>
+            </div>
+          </div>
+          <p>Every run ends in three tidy posts. If one link drops <code>?lang=en</code>, or the Monday post goes out an hour late, nothing in the final pack tells you. Scoring the whole skill tells you <em>whether</em> it is reliable. It does not tell you <em>where</em> it is not.</p>
+        </div>
+      </section>
+
+      <section id="scenarios">
+        <div class="sec-head">
+          <div class="marker"><span class="num">03</span><span class="eyebrow">The five scenarios</span></div>
+          <h2>Each one is harder to see than the last.</h2>
+        </div>
+        <div class="stack">
+          <p>Every scenario is a working skill, an input with traps planted on purpose, an answer key, and a fixed version. Try to spot the trap before you open it.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th></th><th>Scenario</th><th>What it does</th><th>Difficulty</th><th>The trap</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>01</td>
+                  <td><strong>Split the bill</strong></td>
+                  <td>Settles a weekend in Lisbon for four friends, in euros and pounds.</td>
+                  <td><span class="difficulty" aria-label="1 of 5"><i class="on"></i><i></i><i></i><i></i><i></i></span></td>
+                  <td><details><summary>Show</summary><p>There are no exchange rates at the weekend, a refund has to stay negative, and the balances must add up to exactly £0.00.</p></details></td>
+                </tr>
+                <tr>
+                  <td>02</td>
+                  <td><strong>Social post generator</strong></td>
+                  <td>Turns a blog post into scheduled posts for X, LinkedIn and Threads.</td>
+                  <td><span class="difficulty" aria-label="2 of 5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></td>
+                  <td><details><summary>Show</summary><p>The tagged link takes about 120 of X's 280 characters. The URL already has a query, and the clocks go forward between the first and second post.</p></details></td>
+                </tr>
+                <tr>
+                  <td>03</td>
+                  <td><strong>Release notes</strong></td>
+                  <td>Turns a git log into a changelog, the next version and the credits.</td>
+                  <td><span class="difficulty" aria-label="3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></td>
+                  <td><details><summary>Show</summary><p>One breaking change hides in the body of a fix. Below 1.0, this project bumps the minor version. One contributor appears only in a Co-authored-by line.</p></details></td>
+                </tr>
+                <tr>
+                  <td>04</td>
+                  <td><strong>Dependency triage</strong></td>
+                  <td>Decides which npm packages can update and which have known holes.</td>
+                  <td><span class="difficulty" aria-label="4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td>
+                  <td><details><summary>Show</summary><p>As text, 4.17.4 sorts after 4.17.21. And <code>^0.4.2</code> does not allow 0.5.0, which is the version that fixes the XSS.</p></details></td>
+                </tr>
+                <tr>
+                  <td>05</td>
+                  <td><strong>SLA breach report</strong></td>
+                  <td>Finds support tickets that missed their target, in business hours.</td>
+                  <td><span class="difficulty" aria-label="5 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></td>
+                  <td><details><summary>Show</summary><p>The week has Easter in it and starts the day after the clocks change. Timestamps mix UTC and BST, one ticket is still unanswered, and Enterprise customers have a tighter target.</p></details></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="sessions">
+        <div class="sec-head">
+          <div class="marker"><span class="num">04</span><span class="eyebrow">Three sessions</span></div>
+          <h2>Predict, run, read, fix. Each in a fresh session.</h2>
+        </div>
+        <div class="stack">
+          <p>Each session saves its work to a <code>notebook/</code> folder and the next one picks it up, so you can stop between them. The runs themselves happen in your terminal. Each one is a brand-new Claude Code session in an empty folder that holds only the skill and its input, so the model never sees the answers.</p>
+          <div class="sessions">
+            <div class="session">
+              <span class="n">1</span>
+              <div class="body">
+                <span class="who">In Claude Code</span>
+                <h3>Map it before you run it</h3>
+                <p>Claude reads only the skill and its input. It marks each step, flags what is unsaid, and predicts the pass rate per step.</p>
+                <div class="cmd"><pre>/lab-map 01</pre><button type="button" data-copy="/lab-map 01">Copy</button></div>
+              </div>
+            </div>
+            <div class="session run">
+              <span class="n">5×</span>
+              <div class="body">
+                <span class="who">In your terminal</span>
+                <h3>Run it in five fresh sessions</h3>
+                <p>The runner keeps every step's file and grades each one. Start on Haiku because it is cheap, then try a bigger model and watch the failures move.</p>
+                <div class="cmd"><pre>node bin/lab.mjs run 01 --runs 5 --model haiku</pre><button type="button" data-copy="node bin/lab.mjs run 01 --runs 5 --model haiku">Copy</button></div>
+              </div>
+            </div>
+            <div class="session">
+              <span class="n">2</span>
+              <div class="body">
+                <span class="who">In Claude Code</span>
+                <h3>Read every failure</h3>
+                <p>Claude opens the file behind each failed check and gives it a verdict. Then it reads one run that passed everything and looks for what no check caught.</p>
+                <div class="cmd"><pre>/lab-read 01</pre><button type="button" data-copy="/lab-read 01">Copy</button></div>
+              </div>
+            </div>
+            <div class="session">
+              <span class="n">3</span>
+              <div class="body">
+                <span class="who">In Claude Code, then your terminal</span>
+                <h3>Fix the earliest weak step, then prove it</h3>
+                <p>Claude copies the skill and fixes the first step that fell short, usually by turning it into a script. You run the copy and compare the two batches check by check.</p>
+                <div class="cmd"><pre>/lab-fix 01</pre><button type="button" data-copy="/lab-fix 01">Copy</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="checks">
+        <div class="sec-head">
+          <div class="marker"><span class="num">05</span><span class="eyebrow">Checking every step</span></div>
+          <h2>One file per step, one check per file.</h2>
+        </div>
+        <div class="stack">
+          <p>Every step saves a file in a fixed shape, so a check can look in one known place and be exact. The checks are plain code, so the same file gets the same verdict every time. This is part of a real report from one Haiku run of the post generator:</p>
+<div class="report" role="img" aria-label="Sample report: step 4 had two checks pass and one fail; the LinkedIn post was said to be 863 characters but was actually 861"><span class="h">step 4  Fit the limits</span>
+  <span class="p">●</span>   1/1  Every final post is within its platform's limits
+  <span class="f">○</span>   0/1  The character count the step reported is the real count
+  <span class="p">●</span>   1/1  Shortening kept every link whole
+
+<span class="h">Why each check failed</span>
+  step 4 · run 1 · The character count the step reported is the real count
+      <span class="d">linkedin: said 863, actually 861</span></div>
+          <p>The post fit. The model still reported a measurement it never made. A two-character error is harmless here and fatal on a post near the limit.</p>
+          <p>A failed check means one of four things. Open the step's file before you decide which.</p>
+          <div class="verdicts">
+            <div><h3>The step was wrong</h3><p>The skill was clear, and the model got it wrong anyway.</p></div>
+            <div><h3>The skill left it open</h3><p>The skill never said, so the model guessed.</p></div>
+            <div><h3>Bad input</h3><p>An earlier step handed this one a wrong file.</p></div>
+            <div><h3>The check was wrong</h3><p>The file is right and the check is mistaken.</p></div>
+          </div>
+          <p class="callout">Every check in the repo comes with a <code>break()</code> that makes its step wrong on purpose. <code>node bin/lab.mjs selftest</code> proves each check passes on the right answers and fails once broken. While building the lab, it caught one of my own checks that could never fail.</p>
+        </div>
+      </section>
+
+      <section id="fix">
+        <div class="sec-head">
+          <div class="marker"><span class="num">06</span><span class="eyebrow">The fix</span></div>
+          <h2>Keep the judgement. Hand the counting to code.</h2>
+        </div>
+        <div class="stack">
+          <p>Each scenario ships a fixed skill. The steps that needed judgement stay with the model. The rest become short scripts with no dependencies, which the skill runs and the model is told not to second-guess. Step 4 of the post generator shows the most useful pattern, where the model proposes and code decides.</p>
+          <div class="pair">
+            <figure>
+              <figcaption>As written</figcaption>
+<pre>4. Check each post against its platform's
+   character limits, counting every character
+   including the link, and shorten any that
+   are over.</pre>
+            </figure>
+            <figure>
+              <figcaption>Fixed</figcaption>
+<pre>4. Measure the posts. <mark>Do not count characters
+   yourself:</mark>
+
+   node "${CLAUDE_SKILL_DIR}/scripts/measure.mjs" \
+     out/3-posts.json
+
+   If it lists any, save shorter versions <mark>(keep
+   the link whole)</mark> and run it again. Repeat until
+   it prints `All posts fit.`</pre>
+            </figure>
+          </div>
+          <p>A sentence closes a gap the skill left open. A script closes it the same way on every run and every model, Haiku included.</p>
+        </div>
+      </section>
+
+      <section id="start">
+        <div class="sec-head">
+          <div class="marker"><span class="num">07</span><span class="eyebrow">Start</span></div>
+          <h2>Clone it and start with 01.</h2>
+        </div>
+        <div class="stack">
+          <ul class="list">
+            <li>Claude Code, logged in. Each run is one full session on your account and reports what it cost.</li>
+            <li>Node 20 or newer. The repo has no dependencies to install.</li>
+            <li>macOS or Linux. On Windows, use WSL.</li>
+          </ul>
+          <div class="cmd"><pre>git clone https://github.com/dpcleitao/deterministic-code-educational
+cd deterministic-code-educational
+node bin/lab.mjs selftest</pre><button type="button" data-copy="git clone https://github.com/dpcleitao/deterministic-code-educational&#10;cd deterministic-code-educational&#10;node bin/lab.mjs selftest">Copy</button></div>
+          <p>The selftest makes no model calls. Then open Claude Code in the folder and type <code>/lab-map 01</code>.</p>
+          <p class="callout">Five runs shows you where a skill is weak. It is too few to quote a rate. Run ten or twenty before you put a number on anything.</p>
+        </div>
+      </section>
+
+      <footer>
+        <div>
+          <p class="eyebrow" style="color: var(--ink-4); margin-bottom: 8px;">By</p>
+          <p>Dan Leitão. I build and teach AI development workflows. <a class="link" href="https://danleitao.com">danleitao.com</a></p>
+        </div>
+        <div>
+          <p class="eyebrow" style="color: var(--ink-4); margin-bottom: 8px;">Licence</p>
+          <p>The lab is MIT licensed. Fork it, add a scenario from your own work, and send it back.</p>
+        </div>
+      </footer>
+    </main>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('[data-copy]').forEach((button) => {
+  button.addEventListener('click', () => {
+    const text = button.getAttribute('data-copy');
+    const done = () => { button.textContent = 'Copied'; setTimeout(() => (button.textContent = 'Copy'), 1600); };
+    const select = () => {
+      const pre = button.parentElement.querySelector('pre');
+      const range = document.createRange();
+      range.selectNodeContents(pre);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      button.textContent = 'Selected';
+    };
+    try {
+      navigator.clipboard.writeText(text).then(done, select);
+    } catch {
+      select();
+    }
+  });
+});
+</script>

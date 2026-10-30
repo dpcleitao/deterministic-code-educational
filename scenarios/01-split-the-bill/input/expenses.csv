@@ -1,0 +1,14 @@
+id,date,paid_by,amount,currency,split_between,description
+E01,2026-05-07,Ana,412.00,GBP,all,Flights for four
+E02,2026-05-08,Ben,186.40,EUR,all,Dinner at the cervejaria
+E03,2026-05-08,Chloé,23.70,EUR,all,Taxi from the airport
+E04,2026-05-09,Dev,96.00,EUR,all,Tram tour tickets
+E05,2026-05-09,Ana,41.25,EUR,Ana;Ben;Chloé,Wine bar (Dev skipped it)
+E06,2026-05-09,Ben,10.00,GBP,Ben;Chloé;Dev,Shared data top-up
+E07,2026-05-10,Chloé,138.60,EUR,all,Sunday lunch
+E08,2026-05-10,Dev,18.90,EUR,Ana;Dev,Pastéis de nata
+E09,2026-05-10,Ben,720.00,GBP,all,Apartment for three nights
+E10,2026-05-11,Ben,52.80,EUR,all,Breakfast and coffee
+E11,2026-05-11,Chloé,31.50,EUR,Ben;Chloé,Museum tickets
+E12,2026-05-11,Ana,-60.00,EUR,all,Apartment key deposit refunded to Ana
+E13,2026-05-11,Dev,44.00,EUR,all,Taxi to the airport

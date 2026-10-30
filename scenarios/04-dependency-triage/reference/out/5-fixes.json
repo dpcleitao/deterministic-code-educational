@@ -1,0 +1,14 @@
+{
+  "dashkit": {
+    "fixed_in": "4.17.21",
+    "range_allows": true
+  },
+  "fetchline": {
+    "fixed_in": "6.19.8",
+    "range_allows": false
+  },
+  "@acme/ui-kit": {
+    "fixed_in": "0.5.0",
+    "range_allows": false
+  }
+}
