@@ -24,7 +24,8 @@ the weak steps themselves.
 | `scenarios/<id>/checks.mjs` | The answer key: steps, checks, and a `break()` per check |
 | `scenarios/<id>/solution/` | The fixed skill: deterministic steps moved into `scripts/` |
 | `scenarios/<id>/reference/out/` | Known-good outputs. The selftest regenerates the scripted ones |
-| `.claude/skills/lab-*` | The learner's three sessions: map, read, fix |
+| `.claude/skills/lab-*` | The learner's sessions: demo, map, read, fix |
+| `demo/` | Scratch output of `/lab-demo`, ignored by git |
 
 ## Working on the repo itself
 

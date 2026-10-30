@@ -22,6 +22,21 @@ node bin/lab.mjs selftest
 The selftest makes no model calls. It shows every check passing on the right answers and failing when its
 step is broken on purpose.
 
+## See one run first
+
+Every scenario ships with its own invented demo data in `scenarios/<id>/input/`: a blog post and
+campaign brief, a trip's expenses, a git log, a project's npm packages, a week of support tickets.
+To watch a skill work on it, open Claude Code in this folder and type:
+
+```
+/lab-demo 02
+```
+
+Claude copies the demo data into `demo/02-post-generator/`, follows the skill step by step in the chat,
+saves each step's file to `demo/02-post-generator/out/`, and then grades every step. `/lab-demo 02 solution`
+does the same with the fixed version. The demo runs in a session that can see the repo, so treat it as a
+preview. The real test is five fresh sessions, below.
+
 ## The scenarios
 
 Start at the top. Each one is harder to see than the last.
@@ -116,8 +131,10 @@ Things worth knowing:
   `--allow-code` to let sessions run any shell command.
 - **Cost.** Every run reports what it spent. `--budget` caps each session (default $1). Haiku is the cheap
   way to practise. More runs give a steadier rate: five shows you the shape, not a number to quote.
-- **Results** go to `runs/<scenario>/<batch>/`. That folder is ignored by git. Each run keeps its `out/`
-  files and a `transcript.jsonl` of everything the session did.
+- **Results** go to `runs/<scenario>/<batch>/`, which git ignores. `report.md` is the table. Each
+  `run-N/out/` holds that session's step files and final output (the posts, the message, the plan), and
+  `run-N/transcript.jsonl` records everything the session did. You can also ask Claude in this folder to
+  start a run for you; it runs the same command.
 
 ## Why every step saves a file
 
