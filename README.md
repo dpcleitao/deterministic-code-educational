@@ -14,7 +14,7 @@ which. When the final answer is off, nothing tells you which step moved.
 - macOS or Linux. On Windows, use WSL.
 
 ```bash
-git clone <this repo>
+git clone https://github.com/dpcleitao/deterministic-code-educational
 cd deterministic-code-educational
 node bin/lab.mjs selftest
 ```
